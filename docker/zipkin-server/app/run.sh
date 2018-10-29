@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar zipkin-server-0.0.1-SNAPSHOT.jar
