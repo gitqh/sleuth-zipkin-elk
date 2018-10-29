@@ -23,7 +23,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:rodo
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -52,7 +52,7 @@ services:
     build:
       context: order-service
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - elk
     depends_on:
@@ -64,7 +64,7 @@ services:
     build:
       context: user-service
     ports:
-      - 8081:8081
+      - "8081:8081"
     networks:
       - elk
 
@@ -72,7 +72,7 @@ services:
     build:
       context: product-service
     ports:
-      - 8083:8083
+      - "8083:8083"
     networks:
       - elk
     volumes:
@@ -82,15 +82,15 @@ services:
     build:
       context: logistics-service
     ports:
-      - 8082:8082
+      - "8082:8082"
     networks:
       - elk
 
   zipkin-server:
     build:
-      context: logistics-service
+      context: zipkin-server
     ports:
-      - 9411:9411
+      - "9411:9411"
     networks:
       - elk
 
