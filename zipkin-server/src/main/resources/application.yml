@@ -3,16 +3,17 @@ server:
 spring:
   application:
     name: zipkin-server
-#  sleuth:
-#      enabled: false
-#  datasource:
-#    schema: classpath:/mysql.sql
-#    url: jdbc:mysql://localhost:3306/zipkin?autoReconnect=true
-#    username: root
-#    password:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    initialize: true
-#    continue-on-error: true
-#zipkin:
-#  storage:
-#    type: mysql
+  sleuth:
+    enabled: false
+  zipkin:
+    storage:
+      type: elasticsearch
+      StorageComponent: elasticsearch
+      elasticsearch:
+        cluster: docker-cluster
+        max-requests: 30
+        index: zipkin
+        index-shards: 3
+        index-replicas: 1
+        hosts: localhost:9200
+
