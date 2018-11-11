@@ -1,0 +1,112 @@
+version: '2'
+
+services:
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./data:/opt/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    depends_on:
+      - order-service
+
+  logstash:
+    build:
+      context: logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./log:/var/log:ro
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+      - order-service
+
+  kibana:
+    build:
+      context: kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  order-service:
+    build:
+      context: order-service
+    ports:
+      - "8080:8080"
+    networks:
+      - elk
+    depends_on:
+      - user-service
+      - product-service
+      - logistics-service
+    volumes:
+      - ./log:/log
+
+  user-service:
+    build:
+      context: user-service
+    ports:
+      - "8081:8081"
+    networks:
+      - elk
+    volumes:
+      - ./log:/log
+
+  product-service:
+    build:
+      context: product-service
+    ports:
+      - "8083:8083"
+    networks:
+      - elk
+    volumes:
+      - /tmp:/sells
+      - ./log:/log
+
+  logistics-service:
+    build:
+      context: logistics-service
+    ports:
+      - "8082:8082"
+    networks:
+      - elk
+    volumes:
+      - ./log:/log
+
+  zipkin-server:
+    build:
+      context: zipkin-server
+    ports:
+      - "9411:9411"
+    networks:
+      - elk
+
+
+networks:
+  elk:
+    driver: bridge
