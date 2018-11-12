@@ -11,7 +11,7 @@ spring:
     sampler:
       percentage: 1.0
 logging:
-  file: ../docker/log/order-service.log
+  file: /log/order-service.log
   level:
     root: INFO
     org.springframework.web.servlet.DispatcherServlet: DEBUG
