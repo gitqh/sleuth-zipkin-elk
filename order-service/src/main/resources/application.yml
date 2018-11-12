@@ -6,7 +6,7 @@ spring:
   application:
     name: order-service
   zipkin:
-    base-url: http://localhost:9411
+    base-url: http://zipkin-server:9411
   sleuth:
     sampler:
       percentage: 1.0
@@ -37,7 +37,7 @@ endpoints:
 user:
   service:
     name: UserService
-    baseUrl: http://localhost:8081/user-service
+    baseUrl: http://user-service:8081/user-service
     username: apiuser
     password: password
     poolSize: 20
@@ -45,7 +45,7 @@ user:
 logistics:
   service:
     name: LogisticsService
-    baseUrl: http://localhost:8082/logistics-service
+    baseUrl: http://logistics-service:8082/logistics-service
     username: apiuser
     password: password
     poolSize: 20
@@ -53,7 +53,7 @@ logistics:
 product:
   service:
     name: ProductService
-    baseUrl: http://localhost:8083/product-service
+    baseUrl: http://product-service:8083/product-service
     username: apiuser
     password: password
     poolSize: 20

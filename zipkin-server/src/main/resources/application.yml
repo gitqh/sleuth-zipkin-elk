@@ -15,5 +15,5 @@ spring:
         index: zipkin
         index-shards: 3
         index-replicas: 1
-        hosts: localhost:9200
+        hosts: elasticsearch:9200
 
