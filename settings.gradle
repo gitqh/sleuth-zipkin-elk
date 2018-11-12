@@ -1,4 +1,4 @@
-rootProject.name = 'api-workshop-105'
+rootProject.name = 'sleuth-zipkin-elk'
 include 'user-service'
 include 'logistics-service'
 include 'product-service'

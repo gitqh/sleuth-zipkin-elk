@@ -93,7 +93,7 @@ You can access the two endpoints once you start the services:
      </appender>
      <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
          <encoder>
-             <pattern>%d{"yyyy-MM-dd'T'HH:mm:ss", Asia/Shanghai} [%p][%t][%c][%M][%L] - %m%n</pattern>
+             <pattern>${LOG_PATTERN}</pattern>
          </encoder>
      </appender>
  

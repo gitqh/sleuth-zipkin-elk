@@ -39,6 +39,14 @@ subprojects {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
     }
+
+    task copyTask(type: Copy) {
+        dependsOn build
+        def fromPath = projectDir.toString()  + "/build/libs/" + archivesBaseName.toString() + "-" + version.toString() + ".jar"
+        def intoPath = rootDir.toString() + "/docker/" + archivesBaseName.toString() + "/app"
+        from fromPath
+        into intoPath
+    }
 }
 
 idea.project {

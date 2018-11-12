@@ -10,4 +10,8 @@ spring:
     sampler:
       percentage: 1.0
 logging:
-  path: ./build/log
+  file: ../docker/log/user-service.log
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
