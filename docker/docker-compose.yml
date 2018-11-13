@@ -65,7 +65,7 @@ services:
       - product-service
       - logistics-service
     volumes:
-      - ./log:/var/log
+      - ./log:/log
 
   user-service:
     build:
@@ -75,7 +75,7 @@ services:
     networks:
       - elk
     volumes:
-      - ./log:/var/log
+      - ./log:/log
 
   product-service:
     build:
@@ -86,7 +86,7 @@ services:
       - elk
     volumes:
       - /tmp:/sells
-      - ./log:/var/log
+      - ./log:/log
 
   logistics-service:
     build:
@@ -96,7 +96,7 @@ services:
     networks:
       - elk
     volumes:
-      - ./log:/var/log
+      - ./log:/log
 
   zipkin-server:
     build:

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -jar order-service-0.0.1-SNAPSHOT.jar
+nohup java -jar order-service-0.0.1-SNAPSHOT.jar > /log/order-service.log
