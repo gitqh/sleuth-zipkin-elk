@@ -60,7 +60,7 @@ http://localhost:8080/order-service/orders/1234567890
 
 ## Configure Kibana and view the logs
 
-1. Open Kibana [!http://localhost:5601/](http://localhost:5601/)
+1. Open Kibana [http://localhost:5601/](http://localhost:5601/)
 2. Under "Management" create an Index Pattern. `logstash-*` and `@timestamp`
 3. Choose "Discover" to view the log entries
 
@@ -72,7 +72,7 @@ message: ">>> Call*" AND traceId: "7f3a243d1b53720f"
 
 ## View the tracing in Zipkin
 
-1. Open Zipkin [!http://localhost:9411/](http://localhost:9411/)
+1. Open Zipkin [http://localhost:9411/](http://localhost:9411/)
 2. Choose "Find Traces"
 
 
